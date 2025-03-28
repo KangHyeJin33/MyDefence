@@ -8,9 +8,12 @@ namespace MyDefence
     {
         //필드
         #region Field
-        private float speed = 5f;
+        public float speed = 5f;
 
         private Vector3 targetPosition;
+        //wayPoint 오브젝트의 트랜스폼 객체
+        private Transform target;
+        //wayPoint 배열의 인덱스
         private int wayPointIndex = 0;
         #endregion
 
@@ -19,35 +22,57 @@ namespace MyDefence
         {
             //초기화
             wayPointIndex = 0;
-            targetPosition = WayPoints.wayPoints[wayPointIndex].position;
+            target = WayPoints.wayPoints[wayPointIndex];
         }
 
         // Update is called once per frame
         void Update()
         {
             //이동 구현
-            Vector3 dir = targetPosition - this.transform.position;
+            Vector3 dir = target.position - this.transform.position;
             transform.Translate(dir.normalized * Time.deltaTime * speed, Space.World); //Space.World : 글로벌 방향
 
-            //targetPosition 도착 판정
-            float distance = Vector3.Distance(targetPosition, this.transform.position);
+            //target 도착 판정
+            float distance = Vector3.Distance(target.position, this.transform.position);
 
-            for (int i = 0; i < WayPoints.wayPoints.Length; i++)
+            if (distance <= 0.1f)
             {
+                Debug.Log("도착 !");
+                //다음 타겟 셋팅
+                GetNextTarget();
+               
+                //wayPointIndex++; //1번
+                //targetPosition = WayPoints.wayPoints[wayPointIndex].position; //2번
+                //targetPosition = WayPoints.wayPoints[2].position;
+                //targetPosition = WayPoints.wayPoints[3].position;
 
-                if (distance <= 0.1f)
-                {
-                    Debug.Log("도착 !");
-                    //다음 타겟 셋팅
-                    targetPosition = WayPoints.wayPoints[i].position;
 
-                }
-                /*if (distance <= 0.2f)
-                {
-                    targetPosition = WayPoints.wayPoints[2].position;
-                }*/
             }
+
+            //for (int i = 0; i < 8; i++)
+           // {
+            //Debug.Log($"{i}번째 도착 !");
+           // }
+
+
+        }
+
+        //다음 타켓포지션 얻어오기
+        void GetNextTarget()
+        {
+            //종점 도착 판정
+            if (wayPointIndex == WayPoints.wayPoints.Length - 1) //7부터
+            {
+                Debug.Log("종점 도착 !");
+                Destroy(this.gameObject);
+                return;
+            }
+                wayPointIndex++; //1번
+
+            target = WayPoints.wayPoints[wayPointIndex]; //2번
+               
             
+
         }
     }
 }
