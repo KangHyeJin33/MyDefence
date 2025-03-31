@@ -35,24 +35,27 @@ namespace MyDefence
             //target 도착 판정
             float distance = Vector3.Distance(target.position, this.transform.position);
 
-            if (distance <= 0.1f)
+            for (int i = 0; i < distance; i++)
             {
-                Debug.Log("도착 !");
-                //다음 타겟 셋팅
-                GetNextTarget();
-               
-                //wayPointIndex++; //1번
-                //targetPosition = WayPoints.wayPoints[wayPointIndex].position; //2번
-                //targetPosition = WayPoints.wayPoints[2].position;
-                //targetPosition = WayPoints.wayPoints[3].position;
+
+                if (distance <= 0.1f)
+                {
+                    Debug.Log("도착 !");
+                    //다음 타겟 셋팅
+                    GetNextTarget();
+
+                    //wayPointIndex++; //1번
+                    //targetPosition = WayPoints.wayPoints[wayPointIndex].position; //2번
+                    //targetPosition = WayPoints.wayPoints[2].position;
+                    //targetPosition = WayPoints.wayPoints[3].position;
 
 
+                }
             }
+            //for (int i = 0; i < WayPoints.wayPoints.Length; i++)
+            //{
 
-            //for (int i = 0; i < 8; i++)
-           // {
-            //Debug.Log($"{i}번째 도착 !");
-           // }
+            //}
 
 
         }
@@ -63,15 +66,15 @@ namespace MyDefence
             //종점 도착 판정
             if (wayPointIndex == WayPoints.wayPoints.Length - 1) //7부터
             {
-                Debug.Log("종점 도착 !");
+                Debug.Log("종점 도착");
                 Destroy(this.gameObject);
                 return;
             }
-                wayPointIndex++; //1번
+            wayPointIndex++; //1번
 
             target = WayPoints.wayPoints[wayPointIndex]; //2번
-               
-            
+
+
 
         }
     }

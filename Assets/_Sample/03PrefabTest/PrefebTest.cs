@@ -1,7 +1,6 @@
-using UnityEngine;
-using System.Collections;
-
 //타일 게임 오브젝트로 추가 안하고 프리팹으로 만들기
+using System.Collections;
+using UnityEngine;
 
 namespace Sample
 {
@@ -74,7 +73,7 @@ namespace Sample
                 {
                     GameObject game = Instantiate(tilePrefeb, this.transform);
                     game.transform.position = new Vector3(j * 500f, 0f, i * -500f);*/
-                }
+        }
 
         IEnumerator GenerateRandomMap()
         {
@@ -87,10 +86,10 @@ namespace Sample
                 yield return new WaitForSeconds(0.2f);
             }
         }
- }
+    }
 }
 
-    
+
 
 
 /*

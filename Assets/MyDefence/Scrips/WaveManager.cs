@@ -29,9 +29,7 @@ namespace MyDefence
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
-            //필드 초기화
-            countdown = 3f;
-            waveTimer = 0;
+
         }
 
         // Update is called once per frame
@@ -41,20 +39,20 @@ namespace MyDefence
             countdown += Time.deltaTime; //한바퀴 도는데 걸리는 시간을 countdown에 누적
             if (countdown >= waveTimer) //countdown이 waveTimer가 지나면 아래 실행
             {
-               
-                    //타이머 기능
-                    StartCoroutine(SpawnWave());
+
+                //타이머 기능
+                StartCoroutine(SpawnWave());
 
 
-                    //타이머 초기화
-                    countdown = 0f;
-                
-               }
+                //타이머 초기화
+                countdown = 0f;
+
+            }
             //UI
             countdownText.text = Mathf.Round(countdown).ToString();
 
 
-            }
+        }
         void SpawnEnemy()//시작 지점에 enemy 한마리 스폰 함수로 만들기.
         {
             //시작 지점에 enemy 한마리 스폰.
@@ -65,14 +63,14 @@ namespace MyDefence
         IEnumerator SpawnWave()//시작 지점에 enemy 한마리 스폰 함수로 만들기.
         {
             waveCount++;
-           
+
             //시작 지점에 enemy 한마리 스폰.
             for (int i = 0; i <= waveCount; i++)
             {
                 SpawnEnemy();
                 yield return new WaitForSeconds(0.5f);
             }
-           
+
 
         }
     }
