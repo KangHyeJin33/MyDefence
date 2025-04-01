@@ -35,47 +35,36 @@ namespace MyDefence
             //target 도착 판정
             float distance = Vector3.Distance(target.position, this.transform.position);
 
-            for (int i = 0; i < distance; i++)
+            if (distance <= 0.1f)
             {
+                //Debug.Log("도착 !");
+                //다음 타겟 셋팅
+                GetNextTarget();
 
-                if (distance <= 0.1f)
+                //wayPointIndex++; //1번
+                //targetPosition = WayPoints.wayPoints[wayPointIndex].position; //2번
+                //targetPosition = WayPoints.wayPoints[2].position;
+                //targetPosition = WayPoints.wayPoints[3].position;
+
+
+            }
+            void GetNextTarget()
+            {
+                //종점 도착 판정
+                if (wayPointIndex == WayPoints.wayPoints.Length - 1) //7부터
                 {
-                    Debug.Log("도착 !");
-                    //다음 타겟 셋팅
-                    GetNextTarget();
-
-                    //wayPointIndex++; //1번
-                    //targetPosition = WayPoints.wayPoints[wayPointIndex].position; //2번
-                    //targetPosition = WayPoints.wayPoints[2].position;
-                    //targetPosition = WayPoints.wayPoints[3].position;
-
-
+                    Debug.Log("종점 도착");
+                    Destroy(this.gameObject);
+                    return;
                 }
+                wayPointIndex++; //1번
+
+                target = WayPoints.wayPoints[wayPointIndex]; //2번
             }
-            //for (int i = 0; i < WayPoints.wayPoints.Length; i++)
-            //{
-
-            //}
-
-
-        }
-
-        //다음 타켓포지션 얻어오기
-        void GetNextTarget()
-        {
-            //종점 도착 판정
-            if (wayPointIndex == WayPoints.wayPoints.Length - 1) //7부터
-            {
-                Debug.Log("종점 도착");
-                Destroy(this.gameObject);
-                return;
-            }
-            wayPointIndex++; //1번
-
-            target = WayPoints.wayPoints[wayPointIndex]; //2번
-
-
-
+            
         }
     }
 }
+            //for (int i = 0; i < WayPoints.wayPoints.Length; i++)
+                 //{
+    
